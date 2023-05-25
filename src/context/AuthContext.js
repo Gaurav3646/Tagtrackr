@@ -20,6 +20,8 @@ export const AuthContextProvider = ({ children }) => {
     signInWithRedirect(auth, provider);
   };
 
+  const [currentUser, setCurrentUser] = useState({});
+  const [sear, setSear] = useState("");
   const logOut = () => {
     signOut(auth);
   };
@@ -34,7 +36,16 @@ export const AuthContextProvider = ({ children }) => {
     };
   }, []);
   return (
-    <AuthContext.Provider value={{ googleSignIn, logOut, currentUser }}>
+    <AuthContext.Provider
+      value={{
+        currentUser,
+        logOut,
+        sear,
+        setSear,
+        // setStatus,
+        // status,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
