@@ -15,9 +15,11 @@ import GroupIcon from "@mui/icons-material/Group";
 import { Link } from "react-router-dom";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext } from "react";
+import { UserAuth } from "../../context/AuthContext";
 
 const Sidebar = () => {
   const { dispatch } = useContext(DarkModeContext);
+  const { logOut } = UserAuth();
   return (
     <div className="sidebar">
       <div className="top">
@@ -81,7 +83,7 @@ const Sidebar = () => {
             <AccountCircleOutlinedIcon className="icon" />
             <span>Profile</span>
           </li>
-          <li>
+          <li onClick={() => logOut()}>
             <ExitToAppIcon className="icon" />
             <span>Logout</span>
           </li>

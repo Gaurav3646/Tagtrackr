@@ -1,56 +1,44 @@
-import { createContext, useEffect, useState } from "react";
+import { useContext, createContext, useEffect, useState } from "react";
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithRedirect,
+  signOut,
+  onAuthStateChanged,
+} from "firebase/auth";
 import { auth } from "../firebase";
-import React from "react";
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import { getDoc, doc } from "firebase/firestore";
-import { db } from "../firebase";
-import { useContext } from "react";
+import { Navigate } from "react-router";
+
 const AuthContext = createContext();
 
-const AuthContextProvider = ({ children }) => {
-  //   const [status, setStatus] = useState("");
+export const AuthContextProvider = ({ children }) => {
+  const [currentUser, setCurrentUser] = useState(undefined);
 
-  const [currentUser, setCurrentUser] = useState({});
+  const googleSignIn = () => {
+    const provider = new GoogleAuthProvider();
+    // signInWithPopup(auth, provider);
+    signInWithRedirect(auth, provider);
+  };
+
   const logOut = () => {
-    console.log("log out");
     signOut(auth);
   };
+
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, async (user) => {
-      console.log(user);
-
-      const docRef = await doc(db, "users", "gauravverma3646@gmail.com");
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        // setStatus(docSnap.data()?.status);
-        setCurrentUser(docSnap.data());
-        console.log(docSnap.data());
-        // console.log(status);
-      } else {
-        // doc.data() will be undefined in this case
-        console.log("No such document!");
-      }
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setCurrentUser(currentUser);
+      console.log("User", currentUser);
     });
     return () => {
-      unsub();
+      unsubscribe();
     };
   }, []);
-
   return (
-    <AuthContext.Provider
-      value={{
-        currentUser,
-        logOut,
-        // setStatus,
-        // status,
-      }}
-    >
+    <AuthContext.Provider value={{ googleSignIn, logOut, currentUser }}>
       {children}
     </AuthContext.Provider>
   );
 };
-export default AuthContextProvider;
 
 export const UserAuth = () => {
   return useContext(AuthContext);
