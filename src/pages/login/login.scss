@@ -1,3 +1,34 @@
-.login{
-    
+.signInContainer {
+  width: 50%;
+  height: 50%;
+  margin: 0 auto;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.roundedRectangle {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+}
+
+.modelcontainer {
+  margin: 10px;
+}
+
+.model {
+  text-align: center;
+}
+
+.title {
+  font-size: 20px;
+}
+
+.buttonContainer {
+  margin-top: 10px;
+}
+
+.signInButton {
+  width: 100%;
 }
