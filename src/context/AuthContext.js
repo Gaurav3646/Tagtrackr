@@ -11,6 +11,7 @@ const AuthContextProvider = ({ children }) => {
   //   const [status, setStatus] = useState("");
 
   const [currentUser, setCurrentUser] = useState({});
+  const [sear, setSear] = useState("");
   const logOut = () => {
     console.log("log out");
     signOut(auth);
@@ -42,6 +43,8 @@ const AuthContextProvider = ({ children }) => {
       value={{
         currentUser,
         logOut,
+        sear,
+        setSear,
         // setStatus,
         // status,
       }}

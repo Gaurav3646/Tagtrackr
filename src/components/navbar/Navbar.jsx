@@ -7,19 +7,24 @@ import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNone
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
 import { DarkModeContext } from "../../context/darkModeContext";
-import { useContext } from "react";
 import { UserAuth } from "../../context/AuthContext";
+import { useContext } from "react";
 
 const Navbar = () => {
   const { dispatch } = useContext(DarkModeContext);
-  const { currentUser } = UserAuth();
-  console.log(currentUser);
+  const { currentUser,setSear,sear } = UserAuth();
+  //console.log(currentUser);
+
+  const changeHandler=(e)=>{
+    setSear(e.target.value);
+    //console.log(sear);
+ };
 
   return (
     <div className="navbar">
       <div className="wrapper">
         <div className="search">
-          <input type="text" placeholder="Search..." />
+          <input type="text" placeholder="Search..." onChange={changeHandler} />
           <SearchOutlinedIcon />
         </div>
         <div className="items">
