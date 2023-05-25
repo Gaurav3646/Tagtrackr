@@ -6,7 +6,6 @@ import "./login.scss";
 const Signin = () => {
   const { googleSignIn, currentUser } = UserAuth();
   const navigate = useNavigate();
-
   const handleGoogleSignIn = async () => {
     try {
       await googleSignIn();

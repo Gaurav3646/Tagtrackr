@@ -1,13 +1,11 @@
 import { useContext, createContext, useEffect, useState } from "react";
 import {
   GoogleAuthProvider,
-  signInWithPopup,
   signInWithRedirect,
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
 import { auth } from "../firebase";
-import { Navigate } from "react-router";
 
 const AuthContext = createContext();
 
@@ -41,7 +39,7 @@ export const AuthContextProvider = ({ children }) => {
         logOut,
         sear,
         setSear,
-        // setStatus,
+        googleSignIn,
         // status,
       }}
     >

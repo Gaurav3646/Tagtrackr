@@ -7,8 +7,10 @@ import {
   BrowserRouter,
   Routes,
   Route,
-  useNavigate,
   Navigate,
+  redirect,
+  unstable_HistoryRouter,
+  useNavigate,
 } from "react-router-dom";
 import { productInputs, userInputs } from "./formSource";
 import "./style/dark.scss";
@@ -18,9 +20,8 @@ import { UserAuth } from "./context/AuthContext";
 
 const Protected = ({ children }) => {
   const { currentUser } = UserAuth();
-
   if (!currentUser) {
-    return <Navigate to="login" />;
+    return <Navigate replace={true} to="/login" />;
   }
 
   return children;
