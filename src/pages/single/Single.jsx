@@ -6,13 +6,15 @@ import List from "../../components/table/Table";
 import { db } from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { onSnapshot } from "firebase/firestore";
-import { DateRangePickerDay } from "@mui/lab";
+import ReactDatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Map from "../../components/Map/Map";
 import CheckInCheckOut from "../../components/CheckInCheckOut/CheckInCheckOut";
 
 const Single = () => {
+  const [startDate, setStartDate] = useState(new Date());
   const { userId } = useParams();
   console.log(userId);
   const [user, setUser] = useState();
@@ -66,8 +68,13 @@ const Single = () => {
         </div>
 
         <div className="top">
-          <div className="left">
-            <CheckInCheckOut />
+          <div className="left check">
+            <ReactDatePicker
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+            />
+
+            <CheckInCheckOut selectedDate={startDate} />
           </div>
           <div className="bottom">{user && <Map userId={userId} />}</div>
         </div>
