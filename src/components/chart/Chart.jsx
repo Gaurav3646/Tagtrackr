@@ -52,8 +52,6 @@
 
 // export default Chart;
 import "./chart.scss";
-import { doc, getDoc } from "firebase/firestore";
-import { onSnapshot } from "firebase/firestore";
 import {
   BarChart,
   Bar,
@@ -62,64 +60,37 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { useEffect } from "react";
 import { useState } from "react";
-import { db } from "../../firebase";
-import { useParams } from "react-router-dom";
+import ReactDatePicker from "react-datepicker";
+import { UserAuth } from "../../context/AuthContext";
 
-const tempData = [
-  { name: "Mon", Total: 1200 },
-  { name: "Tue", Total: 2100 },
-  { name: "Wed", Total: 800 },
-  { name: "Thu", Total: 1600 },
-  { name: "Fri", Total: 900 },
-  { name: "Sat", Total: 1700 },
-  { name: "Sun", Total: 1700 },
-];
-
-const Chart = ({ aspect, title }) => {
-  // const [data, setData] = useState();
-  // const { userId } = useParams();
-  // const docRef = doc(db, "attendence", "2023-04-28");
-  // console.log(userId);
-  // // Get a document, forcing the SDK to fetch from the offline cache.
-  // useEffect(() => {
-  //   const unsub = onSnapshot(docRef, (doc) => {
-  //     const obj = doc.data();
-  //     Object.keys(obj).forEach((key) => {
-  //       console.log(
-  //         (new Date([
-  //           "2023-04-28",
-  //           obj[key].checkOutTime === "nil"
-  //             ? "24:00:00"
-  //             : obj[key].checkOutTime,
-  //         ]) -
-  //           new Date(["2023-04-28", obj[key].checkInTime])) /
-  //           60000
-  //       );
-  //       // console.log("Current data: ", obj[key]);
-  //     });
-  //   });
-  //   return () => unsub();
-  // }, []);
-
+const Chart = ({ aspect, title, data }) => {
+  const { startDate, handlerDate } = UserAuth();
+  // const [startDate, setStartDate] = useState(new Date());
   return (
     <div className="chart">
       <div className="title">{title}</div>
-      <ResponsiveContainer width="100%" aspect={aspect}>
-        <BarChart
-          width={730}
-          height={250}
-          data={tempData}
-          margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
-        >
-          <CartesianGrid strokeDasharray="3 3" className="chartGrid" />
-          <XAxis dataKey="name" stroke="gray" />
+      <ReactDatePicker
+        selected={startDate}
+        onChange={(date) => handlerDate(date)}
+      />
 
-          <Tooltip />
-          <Bar dataKey="Total" fill="#8884d8" />
-        </BarChart>
-      </ResponsiveContainer>
+      {data.length === 7 && (
+        <ResponsiveContainer width="100%" aspect={aspect}>
+          <BarChart
+            width={730}
+            height={250}
+            data={data}
+            margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+          >
+            <CartesianGrid strokeDasharray="3 3" className="chartGrid" />
+            <XAxis dataKey="name" stroke="gray" />
+
+            <Tooltip />
+            <Bar dataKey="Total" fill="#8884d8" />
+          </BarChart>
+        </ResponsiveContainer>
+      )}
     </div>
   );
 };

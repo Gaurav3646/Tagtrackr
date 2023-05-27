@@ -11,6 +11,11 @@ const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(undefined);
+  const [startDate, setStartDate] = useState(new Date());
+  const handlerDate = (date) => {
+    setStartDate(date);
+    console.log(date);
+  };
 
   const googleSignIn = () => {
     const provider = new GoogleAuthProvider();
@@ -40,6 +45,8 @@ export const AuthContextProvider = ({ children }) => {
         sear,
         setSear,
         googleSignIn,
+        startDate,
+        handlerDate,
         // status,
       }}
     >
