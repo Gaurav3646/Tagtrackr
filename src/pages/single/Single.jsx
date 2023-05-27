@@ -12,9 +12,11 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Map from "../../components/Map/Map";
 import CheckInCheckOut from "../../components/CheckInCheckOut/CheckInCheckOut";
+import { UserAuth } from "../../context/AuthContext";
 
 const Single = () => {
-  const [startDate, setStartDate] = useState(new Date());
+ // const [startDate, setStartDate] = useState(new Date());
+ const { startDate,setStartDate } = UserAuth();
   const { userId } = useParams();
   console.log(userId);
   const [user, setUser] = useState();
@@ -27,6 +29,70 @@ const Single = () => {
     });
     return () => unsub();
   }, []);
+
+
+  const options = {
+    timeZone: "Asia/Kolkata",
+    month: "2-digit",
+    day: "2-digit",
+    year: "numeric",
+  };
+  const tempData = [];
+  // const [startDate, setStartDate] = useState(new Date());
+
+  const deDate = startDate.toLocaleDateString("en-US", options).split("/");
+  const fir = `${deDate[2]}-${deDate[0]}-${deDate[1]}`;
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    var i = 6;
+    const fetchData = async () => {
+      while (i >= 0) {
+        const d = new Date(startDate - 24 * 60 * 60 * 1000 * i);
+        console.log(d);
+        const deDate = d.toLocaleDateString("en-US", options).split("/");
+        const id = `${deDate[2]}-${deDate[0]}-${deDate[1]}`;
+        console.log(id);
+
+        const docRef = doc(db, "attendence", id);
+        // const [data, setData] = useState();
+        // const { userId } = useParams();
+        // Get a document, forcing the SDK to fetch from the offline cache.
+
+        const docSnap = await getDoc(docRef);
+        const obj = docSnap.data();
+        let time = 0;
+        if (obj) {
+          Object.keys(obj).forEach((key) => {
+            if(userId===obj[key].email)
+            {
+              const t =
+              (new Date([
+                "2023-04-28",
+                obj[key].checkOutTime === "nil"
+                  ? "24:00:00"
+                  : obj[key].checkOutTime,
+              ]) -
+                new Date(["2023-04-28", obj[key].checkInTime])) /
+              60000;
+            console.log(t);
+            time = time + t;
+          }
+          });
+        }
+        console.log(time);
+        tempData.push({
+          name: docSnap.id,
+          Total: time.toFixed(2),
+        });
+
+        i = i - 1;
+      }
+      setData(tempData);
+    };
+    fetchData();
+  }, [startDate]);
+  console.log(data);
 
   return (
     <div className="single">
@@ -63,7 +129,7 @@ const Single = () => {
             )}
           </div>
           <div className="right">
-            <Chart aspect={3 / 1} title="User work hours ( Last 7 days)" />
+            <Chart aspect={3 / 1} title="User work hours ( Last 7 days)" data={data} />
           </div>
         </div>
 
