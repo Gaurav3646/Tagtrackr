@@ -5,15 +5,15 @@ import { collection, getDocs, onSnapshot } from "firebase/firestore";
 import { db } from "../../firebase";
 import { Link } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
-import { useEffect, useState,useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 
 const Datatable = () => {
-  const { sear,setSear } = UserAuth();
+  const { sear, setSear } = UserAuth();
   const [data, setData] = useState([]);
   const [userData, setUserData] = useState([]);
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "users"), (q) => {
-      const usersData=[];
+      const usersData = [];
       q.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
         const item = doc.data();
@@ -38,13 +38,16 @@ const Datatable = () => {
   useEffect(() => {
     //console.log(data);
     // item.name.toLoweCase().indexOf(sear.toLowerCase())!==-1
-  //console.log(sear.toLowerCase());
-  //console.log(userData);
-    setData(userData.filter((item) =>item.username.toLowerCase().indexOf(sear.toLowerCase())!==-1));
-  },[sear]);
+    //console.log(sear.toLowerCase());
+    //console.log(userData);
+    setData(
+      userData.filter(
+        (item) => item.username.toLowerCase().indexOf(sear.toLowerCase()) !== -1
+      )
+    );
+  }, [sear]);
 
   const handleDelete = (id) => {
-
     setData(data.filter((item) => item.id !== id));
   };
 
@@ -75,12 +78,12 @@ const Datatable = () => {
   ];
   return (
     <div className="datatable">
-      <div className="datatableTitle">
+      {/* <div className="datatableTitle">
         Add New User
         <Link to="/users/new" className="link">
           Add New
         </Link>
-      </div>
+      </div> */}
       <DataGrid
         className="datagrid"
         rows={data}

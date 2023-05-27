@@ -15,8 +15,8 @@ import CheckInCheckOut from "../../components/CheckInCheckOut/CheckInCheckOut";
 import { UserAuth } from "../../context/AuthContext";
 
 const Single = () => {
- // const [startDate, setStartDate] = useState(new Date());
- const { startDate,setStartDate } = UserAuth();
+  const [startCheckInDate, setStartCheckInDate] = useState(new Date());
+  const { startDate, setStartDate } = UserAuth();
   const { userId } = useParams();
   console.log(userId);
   const [user, setUser] = useState();
@@ -29,7 +29,6 @@ const Single = () => {
     });
     return () => unsub();
   }, []);
-
 
   const options = {
     timeZone: "Asia/Kolkata",
@@ -64,20 +63,19 @@ const Single = () => {
         let time = 0;
         if (obj) {
           Object.keys(obj).forEach((key) => {
-            if(userId===obj[key].email)
-            {
+            if (userId === obj[key].email) {
               const t =
-              (new Date([
-                "2023-04-28",
-                obj[key].checkOutTime === "nil"
-                  ? "24:00:00"
-                  : obj[key].checkOutTime,
-              ]) -
-                new Date(["2023-04-28", obj[key].checkInTime])) /
-              60000;
-            console.log(t);
-            time = time + t;
-          }
+                (new Date([
+                  "2023-04-28",
+                  obj[key].checkOutTime === "nil"
+                    ? "24:00:00"
+                    : obj[key].checkOutTime,
+                ]) -
+                  new Date(["2023-04-28", obj[key].checkInTime])) /
+                60000;
+              console.log(t);
+              time = time + t;
+            }
           });
         }
         console.log(time);
@@ -129,18 +127,22 @@ const Single = () => {
             )}
           </div>
           <div className="right">
-            <Chart aspect={3 / 1} title="User work hours ( Last 7 days)" data={data} />
+            <Chart
+              aspect={3 / 1}
+              title="User work hours ( Last 7 days)"
+              data={data}
+            />
           </div>
         </div>
 
         <div className="top">
           <div className="left check">
             <ReactDatePicker
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
+              selected={startCheckInDate}
+              onChange={(date) => setStartCheckInDate(date)}
             />
 
-            <CheckInCheckOut selectedDate={startDate} />
+            <CheckInCheckOut selectedDate={startCheckInDate} />
           </div>
           <div className="bottom">{user && <Map userId={userId} />}</div>
         </div>

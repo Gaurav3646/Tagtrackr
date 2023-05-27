@@ -82,16 +82,10 @@ const Home = () => {
         <div className="widgets">
           <Widget type="user" />
           <Widget type="order" />
-          <Widget type="earning" />
-          <Widget type="balance" />
         </div>
         <div className="charts">
           <Featured />
           <Chart title="Last 6 Days (Work Hours)" aspect={2 / 1} data={data} />
-        </div>
-        <div className="listContainer">
-          <div className="listTitle">Latest Transactions</div>
-          <Table />
         </div>
       </div>
     </div>

@@ -15,7 +15,7 @@ import { useParams } from "react-router-dom";
 
 export default function CheckInCheckOut({ selectedDate }) {
   const { userId } = useParams();
-  // console.log(selectedDate);
+  console.log(selectedDate);
   // const deDate = selectedDate.selectedDate.split("T")[0];
 
   const options = {
