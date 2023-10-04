@@ -1,26 +1,103 @@
 .signInContainer {
-  width: 100vw;
-  height: 100vh;
-  display: grid;
-  align-items: center;
+  display: flex;
   justify-content: center;
-  .modelcontainer {
-    .model h1 {
+  align-items: center;
+  height: 100vh;
+
+  .left {
+    width: 50%;
+    text-align: center;
+
+    .logo-container {
+      position: relative;
+
+      img {
+        max-width: 100%;
+        height: auto;
+        animation: fadeInLeft 1s both;
+      }
+
+      .logo-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 80px;
+        opacity: 0;
+        transition: opacity 0.5s;
+        pointer-events: none;
+      }
+
+      &.hovered {
+        .logo-text {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .right {
+    width: 50%;
+    padding: 20px;
+
+    .intro {
       text-align: center;
-      width: 100%;
-      padding: 10px;
+      animation: fadeInRight 1s both;
+
+      h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+
+      p {
+        font-size: 16px;
+        color: #555;
+      }
     }
 
     .buttonContainer {
-      display: grid;
+      display: flex;
       justify-content: center;
       align-items: center;
-      /* width: 400px;
-      height: 200px; */
+      animation: fadeInUp 1s both;
+
+      .signInButton {
+        border-radius: 40px;
+        overflow: hidden;
+      }
     }
-    .signInButton {
-      border-radius: 40px;
-      overflow: hidden;
-    }
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
