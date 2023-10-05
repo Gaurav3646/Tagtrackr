@@ -42,7 +42,7 @@ const Signin = () => {
 
       <div className="right">
         <div className="intro">
-          <h1>Welcome to TagTracker</h1>
+          <h1>Welcome to TagTrakr</h1>
           <p>
             Track employee and student activities, attendance, and work hours
             with ease.
