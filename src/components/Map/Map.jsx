@@ -31,7 +31,7 @@ const Map = ({ userId }) => {
 
       const newMap = new mapboxgl.Map({
         container: mapContainer.current,
-        style: "mapbox://styles/jonasschmedtmann/cjvi9q8jd04mi1cpgmg7ev3dy",
+        style: "mapbox://styles/mapbox/streets-v11",
         center: [user.longitude, user.latitude],
         zoom: 12,
       });

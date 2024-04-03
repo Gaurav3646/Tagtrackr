@@ -1,0 +1,51 @@
+.home {
+  display: flex;
+}
+.homeContainer {
+  flex: 6;
+}
+
+.map-container {
+  width: 100%;
+  height: 800px;
+  margin-bottom: 20px;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+
+  margin: 10px;
+}
+
+.input-container input[type="text"] {
+  padding: 10px;
+  flex: 1;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.input-container button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.input-container button:hover {
+  background-color: #0056b3;
+}
+
+.premises-list {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.premises-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 20px;
+}

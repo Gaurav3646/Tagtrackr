@@ -17,10 +17,10 @@ export const AuthContextProvider = ({ children }) => {
     console.log(date);
   };
 
-  const googleSignIn = () => {
+  const googleSignIn = async () => {
     const provider = new GoogleAuthProvider();
     // signInWithPopup(auth, provider);
-    signInWithRedirect(auth, provider);
+    await signInWithRedirect(auth, provider);
   };
 
   const [sear, setSear] = useState("");

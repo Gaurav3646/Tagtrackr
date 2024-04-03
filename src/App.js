@@ -17,6 +17,8 @@ import "./style/dark.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import { UserAuth } from "./context/AuthContext";
+import Maparea from "./pages/maparea/Maparea";
+import PremisesDetailsPage from "./pages/maparea/PremisesDetail";
 
 const Protected = ({ children }) => {
   const { currentUser } = UserAuth();
@@ -43,7 +45,8 @@ function App() {
                 </Protected>
               }
             />
-
+            <Route path="create-premises" element={<Maparea />} />
+            <Route path="premises-details" element={<PremisesDetailsPage />} />
             <Route path="login" element={<Login />} />
             <Route path="users">
               <Route
@@ -67,13 +70,13 @@ function App() {
                 element={<New inputs={userInputs} title="Add New User" />}
               />
             </Route>
-            <Route path="products">
-              <Route index element={<List />} />
-              <Route path=":productId" element={<Single />} />
-              <Route
+            <Route path="groups">
+              <Route index element={<Maparea />} />
+              <Route path=":groupId" element={<PremisesDetailsPage />} />
+              {/* <Route
                 path="new"
                 element={<New inputs={productInputs} title="Add New Product" />}
-              />
+              /> */}
             </Route>
           </Route>
         </Routes>
