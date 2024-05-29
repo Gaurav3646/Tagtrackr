@@ -19,6 +19,7 @@ import { DarkModeContext } from "./context/darkModeContext";
 import { UserAuth } from "./context/AuthContext";
 import Maparea from "./pages/maparea/Maparea";
 import PremisesDetailsPage from "./pages/maparea/PremisesDetail";
+import Profile from "./components/Profile/Profile";
 
 const Protected = ({ children }) => {
   const { currentUser } = UserAuth();
@@ -45,6 +46,7 @@ function App() {
                 </Protected>
               }
             />
+            <Route path="profile" element={<Profile />} />
             <Route path="create-premises" element={<Maparea />} />
             <Route path="premises-details" element={<PremisesDetailsPage />} />
             <Route path="login" element={<Login />} />

@@ -12,6 +12,7 @@ const Map = ({ userId }) => {
   const [map, setMap] = useState(null);
   const [marker, setMarker] = useState(null);
   const [loading, setLoading] = useState(true);
+
   const docRef = doc(db, "user_locations", userId);
 
   useEffect(() => {

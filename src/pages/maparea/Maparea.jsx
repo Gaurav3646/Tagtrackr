@@ -107,6 +107,7 @@ const MapPage = () => {
           premisesData.push({
             id: doc.id,
             ...doc.data(),
+
             area: JSON.parse(doc.data().area),
           });
         });
@@ -125,6 +126,7 @@ const MapPage = () => {
         const premises = {
           name: premisesName,
           area: JSON.stringify(data.features[0].geometry.coordinates[0]),
+          employeeUids: [],
           // You can add more properties as needed
         };
 

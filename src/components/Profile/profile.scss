@@ -1,0 +1,36 @@
+.home {
+  display: flex;
+}
+.homeContainer {
+  flex: 6;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+}
+
+.avatar-profile {
+  margin-right: 20px;
+  margin-left: 120px;
+  margin-top: 20px;
+}
+
+.avatar-circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.name {
+  margin: 0;
+}
+
+.description {
+  margin-top: 5px;
+  color: #666;
+}

@@ -12,13 +12,13 @@ import { useContext } from "react";
 
 const Navbar = () => {
   const { dispatch } = useContext(DarkModeContext);
-  const { currentUser,setSear,sear } = UserAuth();
+  const { currentUser, setSear, sear } = UserAuth();
   //console.log(currentUser);
 
-  const changeHandler=(e)=>{
+  const changeHandler = (e) => {
     setSear(e.target.value);
     //console.log(sear);
- };
+  };
 
   return (
     <div className="navbar">
@@ -28,17 +28,17 @@ const Navbar = () => {
           <SearchOutlinedIcon />
         </div>
         <div className="items">
-          <div className="item">
+          {/* <div className="item">
             <LanguageOutlinedIcon className="icon" />
             English
-          </div>
+          </div> */}
           <div className="item">
             <DarkModeOutlinedIcon
               className="icon"
               onClick={() => dispatch({ type: "TOGGLE" })}
             />
           </div>
-          <div className="item">
+          {/* <div className="item">
             <FullscreenExitOutlinedIcon className="icon" />
           </div>
           <div className="item">
@@ -48,10 +48,10 @@ const Navbar = () => {
           <div className="item">
             <ChatBubbleOutlineOutlinedIcon className="icon" />
             <div className="counter">2</div>
-          </div>
-          <div className="item">
+          </div> */}
+          {/* <div className="item">
             <ListOutlinedIcon className="icon" />
-          </div>
+          </div> */}
           <div className="item">
             <img
               src={currentUser.photoURL}
